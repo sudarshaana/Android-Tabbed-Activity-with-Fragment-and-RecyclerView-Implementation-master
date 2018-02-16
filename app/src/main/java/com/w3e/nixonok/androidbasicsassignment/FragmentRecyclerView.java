@@ -65,39 +65,74 @@ public class FragmentRecyclerView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         View rootView = inflater.inflate(R.layout.fragment_fragment_recycler_view, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_fragment_recycler_view, container, false);
 
-         RecyclerView recyclerView;
+        RecyclerView recyclerView;
 
-        // Item List
-         List<Item> listItem = new ArrayList();
 
         // ImageList
-         int[] images = {R.mipmap.ic_launcher};
+        int[] images = {R.mipmap.ic_launcher};
 
-        // Custom Recycler View Adaptor
-         RecyclerViewAdaptor adapter;
+
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        ArrayList<Section> sectionArrayList = new ArrayList<>();
+        for (int i = 0; i <2 ; i++) {
 
-        for (int i = 0; i < 5; i++) {
+            String label;
+            if (i == 0) label = "Student";
+            else if(i == 1 ) label = "Teacher";
+            else label = "Unknown";
+            // Item List
+            ArrayList<Item> listItem = new ArrayList();
 
-            Item item = new Item();
-            item.setImage(images[0]);
-            item.setTitle("Title " + (i + 1));
-            item.setDescription("Description " + (i + 1));
+            for (int j = 0; j < 5; j++) {
 
-            listItem.add(item);
+                Item item = new Item();
+                item.setImage(images[0]);
+                item.setTitle("Title " + (j + 1));
+                item.setDescription("Description " + label + " " + (j + 1));
+
+                listItem.add(item);
+            }
+            // adding to arraylist
+            if (i == 0) sectionArrayList.add(new Section(label, listItem));
+            else if (i == 1) sectionArrayList.add(new Section(label, listItem));
+            else sectionArrayList.add(new Section(label, listItem));
+
+            // Custom Recycler View Adaptor
+            RecyclerViewSectionAdaptor adapter = new RecyclerViewSectionAdaptor(sectionArrayList, getActivity());
+            recyclerView.setAdapter(adapter);
+
         }
-
-        adapter = new RecyclerViewAdaptor(listItem, getActivity());
-        recyclerView.setAdapter(adapter);
-
-
-
+//
+//
+//// Item List
+//        List<Item> listItem = new ArrayList();
+//
+//        for (int i = 0; i < 5; i++) {
+//
+//            Item item = new Item();
+//            item.setImage(images[0]);
+//            item.setTitle("Title " + (i + 1));
+//            item.setDescription("Description " + (i + 1));
+//            item.setType(Item.TEACHER_TYPE);
+//
+//            listItem.add(item);
+//        }
+//        for (int i = 0; i < 5; i++) {
+//
+//            Item item = new Item();
+//            item.setImage(images[0]);
+//            item.setTitle("Title " + (i + 1));
+//            item.setDescription("Description " + (i + 1));
+//            item.setType(Item.STUDENT_TYPE);
+//
+//            listItem.add(item);
+//        }
 
 
 
