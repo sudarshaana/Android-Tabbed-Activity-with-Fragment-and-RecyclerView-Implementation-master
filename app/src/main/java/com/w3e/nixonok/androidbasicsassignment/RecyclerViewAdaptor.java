@@ -35,7 +35,7 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
 
     @Override
     public void onBindViewHolder(final RecyclerViewAdaptor.ViewHolder holder, final int position) {
-        Item myList = list.get(position);
+        final Item myList = list.get(position);
 
         holder.imageView.setImageResource(myList.getImage());
         holder.textViewHead.setText(myList.getTitle());
@@ -50,24 +50,24 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
             }
 
             private void showPosition(int position) {
-                Toast.makeText(context, "Clicked and Position is " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,  myList.getTitle() +"\n" + myList.getDescription(), Toast.LENGTH_SHORT).show();
 
             }
         });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-
-            private void showPositionx(int position) {
-                Toast.makeText(context, "Long Clicked and Position is " + position, Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public boolean onLongClick(View v) {
-                showPositionx(position);
-                return true;
-            }
-
-        });
+//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//
+//            private void showPositionx(int position) {
+//                Toast.makeText(context, "Long Clicked and Position is " + position, Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            @Override
+//            public boolean onLongClick(View v) {
+//                showPositionx(position);
+//                return true;
+//            }
+//
+//        });
 
 //
 //        holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
